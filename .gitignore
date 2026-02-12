@@ -1,0 +1,23 @@
+# virtual envs
+venv/
+.venv/
+
+# py chaches
+__pycache__/
+*.pyc
+
+# linter cache
+.ruff_cache/
+
+# unit test cache
+.pytest_cache/
+
+# coverage
+.coverage
+coverage.xml
+
+# sonar
+.sonarqube/
+
+# misc
+.DS_Store
