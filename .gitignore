@@ -2,14 +2,10 @@
 venv/
 .venv/
 
-# py chaches
+# caches
 __pycache__/
 *.pyc
-
-# linter cache
 .ruff_cache/
-
-# unit test cache
 .pytest_cache/
 
 # coverage
