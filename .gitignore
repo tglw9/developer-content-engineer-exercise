@@ -12,8 +12,5 @@ __pycache__/
 .coverage
 coverage.xml
 
-# sonar
-.sonarqube/
-
 # misc
 .DS_Store
