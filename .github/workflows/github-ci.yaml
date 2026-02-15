@@ -1,4 +1,4 @@
-name: CI SonarQube Integration
+name: SonarQube Integration Pipeline
 on:
   push:
     branches:
@@ -7,23 +7,23 @@ on:
   pull_request:
     types: [opened, synchronize, reopened]
 jobs:
-  build-and-analyze:
-    name: Setup, Test & Scan
+  validate-and-scan:
+    name: Environment Prep, Verification & Code Analysis
     runs-on: macos-latest
     steps:
-      - name: Checkout # checkout repo
+      - name: Retrieve Source Code
         uses: actions/checkout@v6
         with:
           fetch-depth: 0
-      - name: Setup # setup python 3.14
+      - name: Configure Python Runtime
         uses: actions/setup-python@v6
         with:
           python-version: "3.14"
-      - name: Install # install required dependencies
-        run: python3 -m pip3 install --upgrade pip3 && pip3 install -r requirements.txt
-      - name: Test # test & generate coverage report
+      - name: Dependency Bootstrap
+        run: python3 -m pip install --upgrade pip && python3 -m pip install -r requirements.txt
+      - name: Execute Test Suite with Coverage
         run: pytest --cov=src --cov-report xml:coverage.xml
-      - name: Scan # scan with sonarqube
+      - name: Static Analysis via SonarQube
         uses: SonarSource/sonarqube-scan-action@v6
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
