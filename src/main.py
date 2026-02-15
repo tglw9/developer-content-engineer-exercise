@@ -1,11 +1,9 @@
-def factorial(n: int) -> int:
-    if n < 0:
-        raise ValueError("factorial() not defined for negative values")
-    if n == 0 or n == 1:
-        return 1
-    return n * factorial(n - 1)
+def factorial(n):
+    result = 1
+    for i in range(1, n + 1):
+        result *= i
+    return result
 
 
 if __name__ == "__main__":
-    result = factorial(5)
-    print(f"Factorial of 5 is {result}")
+    print(f"Factorial of 5 is {factorial(5)}")
