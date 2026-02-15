@@ -7,4 +7,5 @@ def factorial(n: int) -> int:
 
 
 if __name__ == "__main__":
-    print(f"Factorial of 5 is {factorial(5)}")
+    result = factorial(5)
+    print(f"Factorial of 5 is {result}")
