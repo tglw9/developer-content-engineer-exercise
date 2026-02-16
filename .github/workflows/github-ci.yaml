@@ -22,7 +22,7 @@ jobs:
       - name: Dependency Bootstrap
         run: python3 -m pip install --upgrade pip && python3 -m pip install -r requirements.txt
       - name: Execute Test Suite with Coverage
-        run: pytest --cov=src --cov-report xml:coverage.xml
+        run: python3 -m coverage run --source=src -m unittest discover -s tests -v && python3 -m coverage xml -o coverage.xml
       - name: Static Analysis via SonarQube
         uses: SonarSource/sonarqube-scan-action@v6
         env:

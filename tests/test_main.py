@@ -1,7 +1,10 @@
+import unittest
+
 from src.main import factorial
 
 
-def test_factorial_simple() -> None:
-    assert factorial(5) == 120
-    assert factorial(6) == 720
-    assert factorial(10) == 3628800
+class TestFactorial(unittest.TestCase):
+    def test_factorial_positive(self) -> None:
+        self.assertEqual(factorial(5), 120)
+        self.assertEqual(factorial(6), 720)
+        self.assertEqual(factorial(10), 3628800)
