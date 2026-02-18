@@ -47,7 +47,7 @@ By the end, you’ll have a CI/CD pipeline that prevents vulnerabilities, enforc
 
 ### Passing Coverage Reports to SonarQube (Critical Step)
 - Why coverage does NOT magically appear  
-- Generating XML coverage via pytest-cov  
+- Generating XML coverage via coverage.py  
 - Configuring `sonar.python.coverage.reportPaths`  
 - *(Full explanatory section provided below.)*
 
@@ -178,7 +178,7 @@ jobs:
 
 ### Callout: Common Pitfall
 
-**Pitfall:** Running pytest without `--cov-report xml`  
+**Pitfall:** Running `python3 -m coverage run --source=src -m unittest discover -s tests -v` without `python3 -m coverage xml -o coverage.xml`  
 **Result:** SonarQube shows 0% coverage even though tests passed.
 
 ### Best Practice — Always Confirm
