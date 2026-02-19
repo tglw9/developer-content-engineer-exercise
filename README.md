@@ -167,7 +167,7 @@ jobs:
 
 *Alright — let’s walk through what happens after you open a Pull Request.*
 
-*On the screen, we’re inside GitHub. I’ve just pushed a feature branch, and you can see the Pull Request is open. Under the checks section, our GitHub Actions workflow is running — this includes linting, unit tests with coverage, and the SonarQube scan.*
+*On GitHub, I’ve just pushed a feature branch, and you can see the Pull Request is open. Under Actions, our workflow is running — this includes the project build, unit tests with coverage, and the SonarQube scan.*
 
 *Once the workflow completes, notice the status check: the SonarQube Quality Gate result appears directly inside the Pull Request. If coverage dropped below 80%, or if we introduced a new vulnerability, the Quality Gate fails — and the merge button is disabled.*
 
