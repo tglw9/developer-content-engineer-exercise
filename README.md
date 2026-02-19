@@ -171,6 +171,6 @@ jobs:
 
 *Once the workflow completes, notice the status check: the SonarQube Quality Gate result appears directly inside the Pull Request. If coverage dropped below 80%, or if we introduced a new vulnerability, the Quality Gate fails — and the merge button is disabled.*
 
-*If we click into the details, we can see coverage metrics, code smells, and security findings tied specifically to this Pull Request. We can even view inline annotations directly in the 'Files Changed' tab.*
+*If we click into the details, we can see coverage metrics, code smells, and security findings tied specifically to this Pull Request.*
 
 *This is Pull Request Decoration — automated, enforceable, and visible before anything reaches main. That’s how we shift quality left — and fail the build, not production.*
