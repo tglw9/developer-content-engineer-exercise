@@ -1,12 +1,4 @@
-# Content Creation
-
----
-
-## Fail the Build, Not Production: Enforcing SonarQube Quality Gates in Python with GitHub Actions
-
----
-
-## Intro
+# Fail the Build, Not Production: Enforcing SonarQube Quality Gates in Python with GitHub Actions
 
 If, like me, you’ve ever merged a Pull Request that looked ok — only to discover later that it introduced a security vulnerability, dropped test coverage, or added hidden technical debt — then you already understand the problem: manual reviews and good intentions aren’t sufficient. Quality must be automated and enforced.
 
@@ -14,54 +6,44 @@ In this guide, we’ll integrate SonarQube into a Python microservice using GitH
 
 By the end, you’ll have a CI/CD pipeline that prevents vulnerabilities, enforces minimum coverage thresholds, and shifts code quality left — starting from the very first commit.
 
----
-
 ## Outline
 
 ### Why Shift-Left Code Quality Matters
 - The cost of late-stage defects  
 - Why linting and unit tests aren’t enough  
 - What a Quality Gate enforces  
-
 ### Project Setup (Python Microservice)
 - Minimal factorial service  
 - Unittest-based unit tests  
 - Ruff linting  
 - Directory structure  
-
 ### Enforcing Local Quality Before Push
 - Git pre-push hook in Python  
 - Running `ruff check .`  
 - Running `unittest`  
 - Why local guardrails reduce CI noise  
-
 ### Configuring GitHub Actions for CI/CD
 - Triggering on push + PR  
 - Installing dependencies  
 - Running tests with coverage  
-
 ### Integrating SonarQube Scanner
 - Using `SonarSource/sonarqube-scan-action`  
 - Required environment variables  
 - `sonar-project.properties` breakdown  
-
 ### Passing Coverage Reports to SonarQube (Critical Step)
 - Why coverage does NOT magically appear  
 - Generating XML coverage via coverage.py  
 - Configuring `sonar.python.coverage.reportPaths`  
-- *(Full explanatory section provided below.)*
-
+- *(Full explanatory section provided below)*
 ### Enforcing the Quality Gate in Pull Requests
 - What a Quality Gate evaluates  
 - How PR Decoration works  
 - Blocking merges with GitHub Branch Protection  
 - Simulating a failed Quality Gate  
-
 ### Common Pitfalls & Best Practices
 - Missing coverage file path  
 - Incorrect source/test directories  
 - Secret misconfiguration  
-
 ### Final Result: Fully Enforced SDLC
 - Automated analysis  
 - PR decoration  
@@ -69,7 +51,6 @@ By the end, you’ll have a CI/CD pipeline that prevents vulnerabilities, enforc
 - Developer confidence  
 
 ---
-
 ## Explanatory Snippet
 
 ### Passing Coverage Reports to SonarQube (The Step Most People Miss)
@@ -108,8 +89,6 @@ coverage.xml
 
 The `--source=src` flag ensures coverage is measured only against source code.
 
----
-
 ### Step 2 — Tell SonarQube Where It Is
 
 Inside `sonar-project.properties`:
@@ -131,8 +110,6 @@ When the GitHub Action runs:
 5. Quality Gate evaluates coverage threshold  
 
 If coverage on new code is below your defined threshold (e.g., 80%), the PR fails.
-
----
 
 ### CI Workflow
 
@@ -174,12 +151,9 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 ```
 
----
-
-### Callout: Common Pitfall
-
-**Pitfall:** Running `python3 -m coverage run --source=src -m unittest discover -s tests -v` without `python3 -m coverage xml -o coverage.xml`  
-**Result:** SonarQube shows 0% coverage even though tests passed.
+> [!NOTE]
+> Common Pitfall: running `python3 -m coverage run --source=src -m unittest discover -s tests -v` without `python3 -m coverage xml -o coverage.xml`  
+> Result: SonarQube shows 0% coverage even though tests passed.
 
 ### Best Practice — Always Confirm
 
@@ -188,3 +162,15 @@ jobs:
 - Tests run before the scan step  
 
 ---
+
+## Video Script Snippet
+
+*Alright — let’s walk through what happens after you open a Pull Request.*
+
+*On the screen, we’re inside GitHub. I’ve just pushed a feature branch, and you can see the Pull Request is open. Under the checks section, our GitHub Actions workflow is running — this includes linting, unit tests with coverage, and the SonarQube scan.*
+
+*Once the workflow completes, notice the status check: the SonarQube Quality Gate result appears directly inside the Pull Request. If coverage dropped below 80%, or if we introduced a new vulnerability, the Quality Gate fails — and the merge button is disabled.*
+
+*If we click into the details, we can see coverage metrics, code smells, and security findings tied specifically to this Pull Request. We can even view inline annotations directly in the 'Files Changed' tab.*
+
+*This is Pull Request Decoration — automated, enforceable, and visible before anything reaches main. That’s how we shift quality left — and fail the build, not production.*
