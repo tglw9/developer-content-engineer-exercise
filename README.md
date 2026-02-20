@@ -165,6 +165,8 @@ jobs:
 
 ## Video Script Snippet
 
+[![Watch the video](https://img.youtube.com/vi/k2fT5eHgbMQ/0.jpg)](https://youtu.be/k2fT5eHgbMQ)
+
 *Alright — let’s walk through what happens after you open a Pull Request.*
 
 *On GitHub, I’ve just pushed a feature branch, and you can see the Pull Request is open. Under Actions, our workflow is running — this includes the project build, unit tests with coverage, and the SonarQube scan.*
